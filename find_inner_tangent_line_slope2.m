@@ -1,4 +1,4 @@
-function  tangentLineSlpoe=find_inner_tangent_line_slope2(partMask,symAxis,tarCorner,LeftRight, nSection,boundingBox)
+function  tangentLineSlope=find_inner_tangent_line_slope2(partMask,symAxis,tarCorner,LeftRight, nSection,boundingBox)
 
 %partMask2=bwareafilt(logical(imdilate(imfill(imerode(partMask,strel('disk',10)),'hole'),strel('disk',10))),1); %Used for reduced area
 
@@ -73,7 +73,7 @@ edgePtsCountDiff2=sign([edgePtsCountDiff,0]);
 IdxLinear=findchangepts(edgePtsCount,'MaxNumChanges',3,'Statistic','linear');
 IdxStd=findchangepts(edgePtsCount,'MaxNumChanges',3,'Statistic','std'); 
 edgePtsCountDiff3=ones( [1,length(edgePtsCount)] );
-edgePtsCountDiff3([IdxLinear,IdxStd]+1)=2; %points shows the disconectivity to its neighbor
+edgePtsCountDiff3([IdxLinear,IdxStd]+1)=2; %points shows the disconnectivity to its neighbor
 edgePtsCountMean=edgePtsCount;
 edgePtsCountMean(edgePtsCountMean<mean(edgePtsCountMean))=0;
 
@@ -89,7 +89,7 @@ end
 %block0=[tarCorner-[1, Ls2cen(intersectLoc)]*max(size(partMask)) ; tarCorner+[1, Ls2cen(intersectLoc)]*max(size(partMask))];
 %block1=[tarCorner-[1, Ls2cen(intersectLoc+1)]*max(size(partMask)) ; tarCorner+[1, Ls2cen(intersectLoc+1)]*max(size(partMask))];
 
- tangentLineSlpoe=Ls2cen(intersectLoc);
+ tangentLineSlope=Ls2cen(intersectLoc);
  
 % vector= [1, tangentLineSlpoe]*size(partMask,1);
 % vec=[tarCorner; tarCorner+sign(tangentLineSlpoe)*vector];

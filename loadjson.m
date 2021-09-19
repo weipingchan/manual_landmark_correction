@@ -175,7 +175,7 @@ function [object, pos,index_esc] = parse_array(inputstr, pos, esc, index_esc, va
                             end
                         end
 
-                        % next handle 2D array, these are most common ones
+                        % next handle 2D array; these are most common ones
                         if(maxlevel==2 && ~isempty(regexp(arraystr(2:end),'^\s*\[','once')))
                             rowstart=find(arraystr(2:end)=='[',1)+1;
                             if(rowstart)

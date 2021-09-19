@@ -10,7 +10,7 @@ function [endpos, maxlevel] = fast_match_bracket(key,pos,startpos,brackets)
 %      key: a preprocessed string containing only relevant opening/closing 
 %           bracket characters for accelerating the search.
 %      pos: a 1D integer vector with a length matching the length of key, 
-%           recording the corresponding position of each char. in the original string.
+%           recording the corresponding position of each character in the original string.
 %      startpos: the index in the original string as the start position to search; the
 %               startpos must be at least 1 greater than the opening bracket position
 %      brackets: (optional), a string of length 2, with the first character

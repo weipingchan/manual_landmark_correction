@@ -1,5 +1,5 @@
-function [bolbMorph,antFig,tipAntenae,tipAnt]=oneAntennaeMeasure03(mask, forkPt00, oneAntenae,antL0,antennaeBase0)
-        antennae = oneAntenae;
+function [bolbMorph,antFig,tipAntennae,tipAnt]=oneAntennaeMeasure03(mask, forkPt00, oneAntenna,antL0,antennaeBase0)
+        antennae = oneAntenna;
         %%
         %find the head instead of fork point
 %         headTipPt=findHeadTip(body);
@@ -78,8 +78,8 @@ function [bolbMorph,antFig,tipAntenae,tipAnt]=oneAntennaeMeasure03(mask, forkPt0
 %         meanW= (antB.Perimeter - sqrt(antB.Perimeter^2-4*2*antB.Area))/(2*2);     %Do average width: regionProp ->  w = (P - sqrt(P^2-4*2*A))/(2*2)
         
         tipMask = createCirclesMask(mask, flip(tipAnt), antL/5);     %Create tip mask again (use 1/5 of total length), and use regionProp find width
-        tipAntenae=bwareafilt(logical(immultiply(antennae,tipMask)),1);
-        bolbB=regionprops(tipAntenae,'MinorAxisLength');
+        tipAntennae=bwareafilt(logical(immultiply(antennae,tipMask)),1);
+        bolbB=regionprops(tipAntennae,'MinorAxisLength');
         bolbW=bolbB.MinorAxisLength;
         bolbMorph=[antL,meanW, bolbW, curveDegree];
         antFig=double(mask*0.1+antennae*0.8); 

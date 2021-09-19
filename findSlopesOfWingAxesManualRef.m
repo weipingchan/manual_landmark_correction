@@ -12,47 +12,47 @@ lowerMask=immultiply(mask,lowerSegMask);
 %figure,imshow(mask); hold on;
 %plot(skeletonEndPts(:,1),skeletonEndPts(:,2),'r*');
 
-%To prevent the result from round shape wing may be biased by thelateral
-%edge, the front end of bounding box are lifted alittle bit.
+%To prevent the result from round shape wing may be biased by the lateral
+%edge, the front end of bounding box are lifted a little bit.
 % liftedLength=100;
 % disp(['Variable [liftedLength]: ',num2str(liftedLength)]);
 %Left end
-%tipL=findCloestPt(skeletonEndPts,boundingBox(1:2)-[0 liftedLength]);
+%tipL=findClosestPt(skeletonEndPts,boundingBox(1:2)-[0 liftedLength]);
 tipL=newTipList(1,:);
 %Right end
-%tipR=findCloestPt(skeletonEndPts,[boundingBox(1)+boundingBox(3),boundingBox(2)-liftedLength]);
+%tipR=findClosestPt(skeletonEndPts,[boundingBox(1)+boundingBox(3),boundingBox(2)-liftedLength]);
 tipR=newTipList(2,:);
 %figure,imshow(mask);hold on;plot(tipL(1),tipL(2),'r*');plot(tipR(1),tipR(2),'r*');plot(segPts(2,1),segPts(2,2),'r*');
-disp('Two tips of fore wing front ends are found.');
+disp('Two tips of fore-wing front ends are found.');
 
 VectorL=tipL-segPts(2,:);
-foreWIngLongAxisSlopeL=VectorL(2)/VectorL(1);
+foreWingLongAxisSlopeL=VectorL(2)/VectorL(1);
 VectorR=tipR-segPts(3,:);
-foreWIngLongAxisSlopeR=VectorR(2)/VectorR(1);
+foreWingLongAxisSlopeR=VectorR(2)/VectorR(1);
 
 nSection=10;
 partMask=lowerMask;
 %Left
 %tarCorner=segPts(end,:);
 %LeftRight='L';
-disp('Start to find the inner tangent line of Left hind wing.');
+disp('Start to find the inner tangent line of Left Hind-wing.');
 try
-    tangentLineSlpoeL=find_inner_tangent_line_slope2(partMask,symAxis,segPts(end,:),'L', nSection,boundingBox);
-    if isempty(tangentLineSlpoeL) tangentLineSlpoeL=symAxis(2)/symAxis(1);, end; 
+    tangentLineSlopeL=find_inner_tangent_line_slope2(partMask,symAxis,segPts(end,:),'L', nSection,boundingBox);
+    if isempty(tangentLineSlopeL) tangentLineSlopeL=symAxis(2)/symAxis(1);, end; 
 catch
-    tangentLineSlpoeL=symAxis(2)/symAxis(1);
+    tangentLineSlopeL=symAxis(2)/symAxis(1);
 end
-disp('The slope of inner tangent line of Left hind wing is determined.');
+disp('The slope of inner tangent line of Left hind-wing is determined.');
 %Right
-disp('Start to find the inner tangent line of Rt hind wing.');
+disp('Start to find the inner tangent line of Right hind-wing.');
 try
-    tangentLineSlpoeR=find_inner_tangent_line_slope2(partMask,symAxis,segPts(end-1,:),'R', nSection,boundingBox);
-    if isempty(tangentLineSlpoeR) tangentLineSlpoeR=symAxis(2)/symAxis(1);, end;
+    tangentLineSlopeR=find_inner_tangent_line_slope2(partMask,symAxis,segPts(end-1,:),'R', nSection,boundingBox);
+    if isempty(tangentLineSlopeR) tangentLineSlopeR=symAxis(2)/symAxis(1);, end;
 catch
-    tangentLineSlpoeR=symAxis(2)/symAxis(1);
+    tangentLineSlopeR=symAxis(2)/symAxis(1);
 end
 disp('The slope of inner tangent line of Right hind wing is determined.');
 
 tipPts=[tipL; tipR];
-WingAxesSlopes=[foreWIngLongAxisSlopeL, tangentLineSlpoeL, foreWIngLongAxisSlopeR, tangentLineSlpoeR];
+WingAxesSlopes=[foreWingLongAxisSlopeL, tangentLineSlopeL, foreWingLongAxisSlopeR, tangentLineSlopeR];
 end

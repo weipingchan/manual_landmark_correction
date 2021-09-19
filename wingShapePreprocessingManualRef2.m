@@ -7,10 +7,10 @@ vdlist={'dorsal','ventral'};
 maskf=mask;
 %maskf2=bwareafilt(imdilate(bwareafilt(imfill(imerode(mask,strel('disk',5)),'hole'),2),strel('disk',2)),1);%Used for reduced area
 
-%Find the symetric axis
-[symCentroid,symAxis,~]=findSymetricAxes(maskf);
-disp('The symatric axis has been found.');
- %FInd the center based on regionprop function   
+%Find the symmetric axis
+[symCentroid,symAxis,~]=findSymmetricAxes(maskf);
+disp('The symmetric axis has been found.');
+ %Find the center based on regionprop function   
  regioncen0=regionprops(maskf,'Centroid','BoundingBox'); %The center of the bounding box
  regioncen= regioncen0.Centroid;
  boundingBox=regioncen0.BoundingBox;
@@ -38,10 +38,10 @@ disp('The symatric axis has been found.');
  %Pick the most suitable one
  if cenDiff<50
     realCen= regioncen;
-     disp('The centroid of the {entire mask} is used as the real cnetroid.');
+     disp('The centroid of the {entire mask} is used as the real centroid.');
  else
      realCen= cenregioncen;
-      disp('The centroid of the {delated central region} is used as the real cnetroid.');
+      disp('The centroid of the {dilated central region} is used as the real centroid.');
  end
  disp('The centroid has been determined.');
  
@@ -52,8 +52,8 @@ disp('The symatric axis has been found.');
  lrCorner=[boundingBox(1)+boundingBox(3),boundingBox(2)+boundingBox(4)];
  allFrameCorners=[ ulCorner; urCorner; llCorner; lrCorner];
 %%
-%Prepare the symetric axes for ploting
-%create symetric axes based on eigenvector
+%Prepare the symmetric axes for plotting
+%create symmetric axes based on eigenvector
 symOrtho=reshape(null(symAxis(:).'),1,[]);
 dim_1=realCen+symAxis*size(maskf,1)/3;
 dim_1plot=[realCen(1),dim_1(1);realCen(2),dim_1(2)];
@@ -80,7 +80,7 @@ hold off;
 %print(figinsp,inspoutname,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figinsp,inspoutname, '-png','-r150');
 close(figinsp);
-disp('An image indcating the primary key points of specimen image has been saved.');
+disp('An image indicating the primary key points of specimen image has been saved.');
 %%
 %Show the mask in an image
 maskoutname=fullfile(Result_directory,'Shape_analysis',subFolderList{2},[template,'_',vdlist{side},flag,'_mask_cen.png']);
@@ -98,7 +98,7 @@ hold off;
 %print(figmask,maskoutname,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figmask,maskoutname, '-png','-r150');
 close(figmask);
-disp('An image indcating the mask and centroid of specimen image has been saved.');
+disp('An image indicating the mask and centroid of specimen image has been saved.');
 %%
 %beltheight=boundingBox(4)*0.25;
 %beltwidth=boundingBox(3)*0.15;
@@ -112,10 +112,10 @@ disp('An image indcating the mask and centroid of specimen image has been saved.
 %      ulCornerDV=boundingBox(1:2);
 %      lrCornerDV=[boundingBox(1)+boundingBox(3),boundingBox(2)+boundingBox(4)];
 %  end
-disp('########## Begin to find the corner between Fore and Hing wings. #########');
-%disp('Begin to find the corner between Left fore and hing wings.');
+disp('########## Begin to find the corner between Fore- and Hind-wings. #########');
+%disp('Begin to find the corner between Left fore-and hind-wings.');
 % nStrongCornersList=[500,1000,2000,4000];
-% nSectionList=[20:5:50]; %number of elements should greater than 4
+% nSectionList=[20:5:50]; %number of elements should be greater than 4
 % 
 % slopeSwitch='wingEdge';
 % [conjPt,forehindCorner,~]=findForeHindCorner(nStrongCornersList,nSectionList,maskf,realCen,symAxis,ulCornerDV,boundingBoxDV,slopeSwitch);
@@ -124,8 +124,8 @@ disp('########## Begin to find the corner between Fore and Hing wings. #########
 %     [conjPt,forehindCorner,~]=findForeHindCorner(nStrongCornersList,nSectionList,maskf,realCen,symAxis,ulCornerDV,boundingBoxDV,slopeSwitch);
 % end
 % forehindCornerL=conjPt;
-%disp('The corner between Left fore and hing wings has been found.');
-%disp('Begin to find the corner between Right fore and hing wings.');
+%disp('The corner between Left fore- and hind-wings has been found.');
+%disp('Begin to find the corner between Right fore- and hind-wings.');
 
 % slopeSwitch='wingEdge';
 % [conjPt,forehindCorner,~]=findForeHindCorner(nStrongCornersList,nSectionList,maskf,realCen,symAxis,lrCornerDV,boundingBoxDV,slopeSwitch);
@@ -134,11 +134,11 @@ disp('########## Begin to find the corner between Fore and Hing wings. #########
 %     [conjPt,forehindCorner,~]=findForeHindCorner(nStrongCornersList,nSectionList,maskf,realCen,symAxis,lrCornerDV,boundingBoxDV,slopeSwitch);
 % end
 % forehindCornerR=conjPt;
-%disp('The corner between Right fore and hing wings has been found.');
+%disp('The corner between Right fore- and hind-wings has been found.');
 
 forehindCornerL=newRefList(1,:);
 forehindCornerR=newRefList(4,:);
-disp('########## Two corners between Fore and Hing wings are Manually defined. #########');
+disp('########## Two corners between Fore- and Hind-wings are manually defined. #########');
 %%
 %%
 %Show the inspection image
@@ -156,14 +156,14 @@ hold off;
 %print(figmask1,maskoutname1,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figmask1,maskoutname1, '-png','-r150');
 close(figmask1);
-disp('An image indcating the mask and fore hind wing corners has been saved.');
+disp('An image indicating the mask and fore-hind wing corners has been saved.');
 %%
 %Find best beltWpar
 % disp('Start to find the optimal body width parameter.');
 % beltWpar=findbeltWpar(maskf,forehindCornerL,forehindCornerR,realCen,boundingBox);
 % disp('The body width parameter has been found.');
 % %%
-% disp('Start to crop upper and lower mask based on the fore-hing wing corners.');
+% disp('Start to crop upper and lower mask based on the fore-hind wing corners.');
 % upperSegMaskPts=[[0,0];[size(maskf,2),0];forehindCornerR;realCen;forehindCornerL];
 % upperSegMask = poly2mask(round(upperSegMaskPts(:,1)),round(upperSegMaskPts(:,2)),size(maskf,1),size(maskf,2));
 % upperMask=immultiply(maskf,upperSegMask);
@@ -171,37 +171,37 @@ disp('An image indcating the mask and fore hind wing corners has been saved.');
 % lowerSegMaskPts=[[0,size(maskf,1)];[size(maskf,2),size(maskf,1)];forehindCornerR;realCen;forehindCornerL];
 % lowerSegMask = poly2mask(round(lowerSegMaskPts(:,1)),round(lowerSegMaskPts(:,2)),size(maskf,1),size(maskf,2));
 % lowerMask=immultiply(maskf,lowerSegMask);
-% disp('Upper and lower mask have been croped out based on the fore-hing wing corners.');
+% disp('Upper and lower mask have been cropped out based on the fore-hind wing corners.');
 
 %%
-disp('########## Start to find the corner between Wing and body. ##########');
-% disp('Begin to find the corner between Left-Fore wing and body.');
-% %Left fore wing
+disp('########## Start to find the corner between wing and body. ##########');
+% disp('Begin to find the corner between Left Fore-wing and body.');
+% %Left fore-wing
 % nStrongCornersList=[1000,1500,2000,4000];
 % nSectionList=[20:4:40]; %number of elements should greater than 4 (lower section number is more conservative; finding shorter but better edge length)
 % [conjPt, conjCorners]=findBodyWingCorner(nStrongCornersList,nSectionList,upperMask,realCen,symAxis,forehindCornerL,'LF',boundingBox,beltWpar);
 % conjCornerLF=conjPt;
-% disp('The corner between Left-Fore wing and body has been found.');
+% disp('The corner between Left Fore-wing and body has been found.');
 % 
-% disp('Begin to find the corner between Right-Fore wing and body.');
-% %Right fore wing
+% disp('Begin to find the corner between Right Fore-wing and body.');
+% %Right fore-wing
 % [conjPt, conjCorners]=findBodyWingCorner(nStrongCornersList,nSectionList,upperMask,realCen,symAxis,forehindCornerR,'RF',boundingBox,beltWpar);
 % conjCornerRF=conjPt;
-% disp('The corner between Right-Fore wing and body has been found.');
+% disp('The corner between Right Fore-wing and body has been found.');
 % 
-% disp('Begin to find the corner between Left-Hind wing and body.');
-% %Left hind wing
+% disp('Begin to find the corner between Left Hind-wing and body.');
+% %Left hind-wing
 % nSectionList=[20:4:40]; %number of elements should greater than 4
 % [conjPt, conjCorners]=findBodyWingCorner(nStrongCornersList,nSectionList,lowerMask,realCen,symAxis,forehindCornerL,'LH',boundingBox,beltWpar);
 % conjCornerLH=conjPt;
-% disp('The corner between Left-Hind wing and body has been found.');
+% disp('The corner between Left Hind-wing and body has been found.');
 % 
-% disp('Begin to find the corner between Right-Hind wing and body.');
-% %Right hind wing
+% disp('Begin to find the corner between Right Hind-wing and body.');
+% %Right hind-wing
 % [conjPt, conjCorners]=findBodyWingCorner(nStrongCornersList,nSectionList,lowerMask,realCen,symAxis,forehindCornerR,'RH',boundingBox,beltWpar);
 % conjCornerRH=conjPt;
-% disp('The corner between Right-Hind wing and body has been found.');
-% disp('########## All landmark corners are found. ##########');
+% disp('The corner between Right Hind-wing and body has been found.');
+% disp('########## All landmark corners have been found. ##########');
 
 conjCornerLF=newRefList(2,:);
 conjCornerRF=newRefList(3,:);
@@ -226,7 +226,7 @@ disp('########## The slope of long axes of wings are determined. ##########');
 if Sphingidae==1
     WingAxesSlopes(2)=0;
     WingAxesSlopes(4)=0;
-    disp('The rotation of hind wings will not be corrected for Sphingidae.');
+    disp('The rotation of hind-wings will not be corrected for Sphingidae.');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%Special Region For Sphingidae%%%%%%%%%%%%%%%
@@ -255,7 +255,7 @@ hold off;
 %print(figchar,charoutname,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figchar,charoutname, '-png','-r150');
 close(figchar);
-disp('An image indcating all key characters of specimen image has been saved.');
+disp('An image indicating all key characters of specimen image has been saved.');
 %%
 %wingPartNameList={'Left Fore Wing','Left Hind Wing','Right Fore Wing','Right Hind Wing'};
 %Segment the wings: (LeftFore, LeftHind, RightFore, RightHind)
@@ -275,7 +275,7 @@ if ~isempty(json_ds)
         end
          disp('Complete with both mask and json file for segmentation');
     catch
-        disp('Something goes wrong in the analysis with json file, return to use naive segmentation');
+        disp('Something went wrong in the analysis with json file, return to use naive segmentation');
         [wingParts,refPts]=segWings(mask,realCen,segPts);
     end
 else
@@ -289,12 +289,12 @@ disp('########## Start to rotate each wing parts. ##########');
 [tformWingImg, tformPtData]=wingRotation(wingParts,WingAxesSlopes,refPts);
 disp('########## The rotation of all wings has been finished. ##########');
 
-disp('########## Start to compose Fore wing and Hind wing. ##########');
-%rotate and normalize the position of a pair of fore wing and hind wings
+disp('########## Start to compose Fore-wing and Hind-wing. ##########');
+%rotate and normalize the position of a pair of fore-wing and hind-wings
 shapeImg=combineForeHindWings(tformWingImg,tformPtData);
 disp('########## Fore wing and Hind wing have been composed. ##########');
 
-disp('########## Start to integrate 4 wings into 1 panel. ##########');
+disp('########## Start to integrate four wings into one panel. ##########');
 [allComImg, allinfo]=integrate4WingsInto1Panel(shapeImg,tformWingImg,refPts);
 disp('########## Integrated image has been generated. ##########');
 %%
@@ -309,7 +309,7 @@ imshow(NewAllComImg);
 %print(figshape,shapevisoutname,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figshape,shapevisoutname, '-png','-r150');
 close(figshape);
-disp('An image showing adjusted specimen wings shape has been saved.');
+disp('An image showing adjusted specimen wing shapes has been saved.');
 
 shapevisoutname=fullfile(Result_directory,'Shape_analysis',subFolderList{4},[template,'_',vdlist{side},flag,'_wings_shape_n_pts.png']);
 figshape=figure('visible', 'off');
@@ -323,5 +323,5 @@ hold off;
 %print(figshape,shapevisoutname,'-dpng','-r150'); %Use print to save high quality images
 export_fig(figshape,shapevisoutname, '-png','-r150');
 close(figshape);
-disp('An image showing adjusted specimen wings shape and boundary Pts has been saved.');
+disp('An image showing adjusted specimen wing shapes and boundary pts has been saved.');
 end

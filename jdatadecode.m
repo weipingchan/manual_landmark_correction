@@ -2,7 +2,7 @@ function newdata=jdatadecode(data,varargin)
 %
 % newdata=jdatadecode(data,opt,...)
 %
-% Convert all JData object (in the form of a struct array) into an array
+% Convert all JData objects (in the form of a struct array) into an array
 % (accepts JData objects loaded from either loadjson/loadubjson or 
 % jsondecode for MATLAB R2018a or later)
 %
@@ -19,7 +19,7 @@ function newdata=jdatadecode(data,varargin)
 %               "_ArrayType_", "_ArraySize_", "_ArrayData_"
 %               "_ArrayIsSparse_", "_ArrayIsComplex_", 
 %               "_ArrayZipType_", "_ArrayZipSize", "_ArrayZipData_"
-%      opt: (optional) a list of 'Param',value pairs for additional options 
+%      opt: (optional) a list of 'Param', value pairs for additional options 
 %           The supported options include
 %               Recursive: [1|0] if set to 1, will apply the conversion to 
 %                            every child; 0 to disable
@@ -40,7 +40,7 @@ function newdata=jdatadecode(data,varargin)
 %                         please set FormatVersion to 1
 %
 % output:
-%      newdata: the covnerted data if the input data does contain a JData 
+%      newdata: the converted data if the input data does contain a JData 
 %               structure; otherwise, the same as the input.
 %
 % examples:

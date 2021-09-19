@@ -4,11 +4,11 @@ function target=wing_selection_within_seg_with_json(mask,cropMask, trimPx, pick_
 
     
  if strcmp(pick_criteria,'upper')
-    wingCandidates=bwareafilt(bwareaopen(logical(imdilate(imerode(immultiply(mask,cropMask),strel('disk',trimPx)),strel('disk',trimPx))),1000),2); %also eliminate small object smaller than 1000
+    wingCandidates=bwareafilt(bwareaopen(logical(imdilate(imerode(immultiply(mask,cropMask),strel('disk',trimPx)),strel('disk',trimPx))),1000),2); %also eliminate small objects smaller than 1000
 elseif strcmp(pick_criteria,'lower')
     wingCandidates=bwareafilt(bwareaopen(logical(immultiply(mask,cropMask)),1000),2); %Preserve tail, so no erosion
 else
-    wingCandidates=bwareafilt(bwareaopen(logical(imdilate(imerode(immultiply(mask,cropMask),strel('disk',trimPx)),strel('disk',trimPx))),1000),2); %also eliminate small object smaller than 1000
+    wingCandidates=bwareafilt(bwareaopen(logical(imdilate(imerode(immultiply(mask,cropMask),strel('disk',trimPx)),strel('disk',trimPx))),1000),2); %also eliminate small objects smaller than 1000
 end
     
     [bL,bn] = bwlabel(wingCandidates);

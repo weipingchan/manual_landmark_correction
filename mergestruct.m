@@ -23,7 +23,7 @@ if(~isstruct(s1) || ~isstruct(s2))
     error('input parameters contain non-struct');
 end
 if(length(s1)>1 || length(s2)>1)
-    error('can not merge struct arrays');
+    error('cannot merge struct arrays');
 end
 fn=fieldnames(s2);
 s=s1;

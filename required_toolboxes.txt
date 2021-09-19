@@ -2,3 +2,4 @@ MATLAB
 Mapping Toolbox
 Image Processing Toolbox
 Statistics and Machine Learning Toolbox
+Deep Learning Toolbox

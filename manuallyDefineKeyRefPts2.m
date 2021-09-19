@@ -54,10 +54,10 @@ function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,ref
         end
         
         if  bflag==0
-%             pause; %Press enter if finish the adjusting
+%             pause; %Press enter if finished with the adjusting
             position0 = getPosition(hit);
             delete(hit);
-            position=findCloestPt([edgePt(:,2),edgePt(:,1)], position0); %move the point on to the edge
+            position=findCloestPt([edgePt(:,2),edgePt(:,1)], position0); %move the point to the edge
             if hid<=size(refPts,1)
                 newRefList=[newRefList; position];
                 plot(position(:,1),position(:,2), 'r+','MarkerSize',8);

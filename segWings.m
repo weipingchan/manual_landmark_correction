@@ -38,7 +38,7 @@ RWingLCornerPt=[intersectX,intersectY];
 
 trimPx=3;
 disp(['Variable [trimPx]: ',num2str(trimPx)]);
-%Left Fore Wing
+%Left Fore-Wing
 [intersectX,intersectY]= polyxpoly(LWingLine(:,1),LWingLine(:,2),Ubound(:,1),Ubound(:,2));
 UboundPt=[intersectX,intersectY];
 [intersectX,intersectY]= polyxpoly(LFcropLine(:,1),LFcropLine(:,2),Lbound(:,1),Lbound(:,2));
@@ -46,9 +46,9 @@ LboundPt=[intersectX,intersectY];
 LFcropPtSet=[1 1 ; UboundPt ; segPts(2,:) ; LWingRCornerPt ; segPts(1,:) ; LboundPt];
 LFcropMask = roipoly(mask,LFcropPtSet(:,1),LFcropPtSet(:,2));
 LFwing=bwareafilt(logical(imdilate(imerode(immultiply(mask,LFcropMask),strel('disk',trimPx)),strel('disk',trimPx))),1);
-disp('Left Fore Wing  is cropped out.');
+disp('Left Fore-Wing is cropped out.');
 
-%Left Hind Wing
+%Left Hind-Wing
 [intersectX,intersectY]= polyxpoly(LWingLine(:,1),LWingLine(:,2),Bbound(:,1),Bbound(:,2));
 BboundPt=[intersectX,intersectY];
 [intersectX,intersectY]= polyxpoly(LHcropLine(:,1),LHcropLine(:,2),Lbound(:,1),Lbound(:,2));
@@ -56,9 +56,9 @@ LboundPt=[intersectX,intersectY];
 LHcropPtSet=[1 size(mask,1) ; BboundPt ; segPts(6,:) ; LWingRCornerPt ; segPts(1,:) ; LboundPt];
 LHcropMask = roipoly(mask,LHcropPtSet(:,1),LHcropPtSet(:,2));
 LHwing=bwareafilt(logical(imdilate(imerode(immultiply(mask,LHcropMask),strel('disk',trimPx)),strel('disk',trimPx))),1);
-disp('Left Hind Wing  is cropped out.');
+disp('Left Hind-Wing is cropped out.');
 
-%Right Fore Wing
+%Right Fore-Wing
 [intersectX,intersectY]= polyxpoly(RWingLine(:,1),RWingLine(:,2),Ubound(:,1),Ubound(:,2));
 UboundPt=[intersectX,intersectY];
 [intersectX,intersectY]= polyxpoly(RFcropLine(:,1),RFcropLine(:,2),Rbound(:,1),Rbound(:,2));
@@ -66,9 +66,9 @@ RboundPt=[intersectX,intersectY];
 RFcropPtSet=[size(mask,2) 1 ; UboundPt ; segPts(3,:) ; RWingLCornerPt ; segPts(4,:) ; RboundPt];
 RFcropMask = roipoly(mask,RFcropPtSet(:,1),RFcropPtSet(:,2));
 RFwing=bwareafilt(logical(imdilate(imerode(immultiply(mask,RFcropMask),strel('disk',trimPx)),strel('disk',trimPx))),1);
-disp('Right Fore Wing  is cropped out.'); 
+disp('Right Fore-Wing is cropped out.'); 
 
-%Right Hind Wing
+%Right Hind-Wing
 [intersectX,intersectY]= polyxpoly(RWingLine(:,1),RWingLine(:,2),Bbound(:,1),Bbound(:,2));
 BboundPt=[intersectX,intersectY];
 [intersectX,intersectY]= polyxpoly(RHcropLine(:,1),RHcropLine(:,2),Rbound(:,1),Rbound(:,2));
@@ -76,7 +76,7 @@ RboundPt=[intersectX,intersectY];
 RHcropPtSet=[flip(size(mask)) ; BboundPt ; segPts(5,:) ; RWingLCornerPt ; segPts(4,:) ; RboundPt];
 RHcropMask = roipoly(mask,RHcropPtSet(:,1),RHcropPtSet(:,2));
 RHwing=bwareafilt(logical(imdilate(imerode(immultiply(mask,RHcropMask),strel('disk',trimPx)),strel('disk',trimPx))),1);
-disp('Right Hind Wing  is cropped out.');
+disp('Right Hind-Wing is cropped out.');
 
 
 

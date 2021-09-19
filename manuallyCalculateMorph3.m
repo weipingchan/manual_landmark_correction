@@ -1,12 +1,10 @@
 function manuallyCalculateMorph3(morph_mat_directory,Code_directory,spp_json_directory,Result_directory,antTrimPx, jumbo, SphingidaeOrNot)
-% Code_directory='D:\Milk desk\Dropbox\Harvard\Coloration_research\Multi_spectra_processing/shape_analysis_v1';
-% morph_mat_directory='D:\Milk desk\Dropbox\Harvard\Coloration_research\Drawer_result\Shape_analysis\wing_shape_matrices';
-% Result_directory='D:\Milk desk\Dropbox\Harvard\Coloration_research\Drawer_result\Shape_analysis\wing_shape_matrices';
+% Code_directory=''; %Directory in which these MATLAB morphometric segmentation scripts live
+% morph_mat_directory=''; %Directory of morph-seg.mat files pulled for problematic images;It can also be the dir of allBandsMask.mat
+% Result_directory=''; %Directory of JSON files created during manual wing segmentation process
 addpath(genpath(Code_directory)) %Add the library to the path
-
-% Sphingidae=SphingidaeOrNot;
-Sphingidae=0; %if the pre-posed-wing image is desired desperatedly for Sphingidae-like specimens, manually turn this to 1, but there may have many errors in the following process.
-% Turn off this warning "Warning: Image is too big to fit on screen; displaying at 33% "
+SphingidaeOrNot=0; %if the pre-posed-wing image is desired desperately for Sphingidae-like specimens, manually change this to 1. Please note that the resulting Sphingidae shape analyses may be very error-prone.
+% Turn off this warning "Warning: Image is too big to fit on screen; displaying at 33%"
 % To set the warning state, you must first know the message identifier for the one warning you want to enable. 
 warning('off', 'Images:initSize:adjustingMag');
 
@@ -93,11 +91,11 @@ for matinID=1:length(img_listing)
         disp(['Key reference points in Img No. ', num2str(matinID),' out of  ',num2str(length(img_listing)),' have been manually defined.']);
 
         %Adjusted analyzing process
-        [realCen, symAxis, symOrtho, boundingBox,  tipPts, refPts, wingParts, WingAxesSlopes, tformWingImg, shapeImg, allComImg, allinfo]=wingShapePreprocessingManualRef2(barcode,flag,mask,spp_json_directory,Result_directory,subFolderList,side,Sphingidae,newTipList,newRefList);
+        [realCen, symAxis, symOrtho, boundingBox,  tipPts, refPts, wingParts, WingAxesSlopes, tformWingImg, shapeImg, allComImg, allinfo]=wingShapePreprocessingManualRef2(barcode,flag,mask,spp_json_directory,Result_directory,subFolderList,side,SphingidaeOrNot,newTipList,newRefList);
         
         bodyTrimPx=5;
 %         jumbo=0;
-%         antTrimPx=5; %Adjust this to extart bold antenna if necessary (20-30 for big antenna; 5-10 for thin antenna)
+%         antTrimPx=5; %Adjust this to extract bold antennae if necessary (20-30 for big antennae; 5-10 for thin antennae)
         if jumbo==0
             [bodyMask, bodyCharacters, antennaMask,antennaCharacters]=body_antenna_module2(mask, wingParts, refPts, tipPts, bodyTrimPx, antTrimPx, scale);
         else
@@ -146,8 +144,8 @@ for matinID=1:length(img_listing)
         morphinfo=cell(0,15);
         morphinfo{1}=mask; %Original mask
         morphinfo{2}=realCen; %Original centroid.
-        morphinfo{3}=symAxis; %The vertical symatric axes
-        morphinfo{4}=symOrtho; %The horizontal symatric axes
+        morphinfo{3}=symAxis; %The vertical symmetric axes
+        morphinfo{4}=symOrtho; %The horizontal symmetric axes
         morphinfo{5}=tipPts; %tips of forewings
         morphinfo{6}=refPts; %Important segment points
         morphinfo{7}=wingParts; %right and left X fore and hind wings. Total: 4
@@ -172,13 +170,13 @@ for matinID=1:length(img_listing)
         close(figseg);
         disp('An image showing img segmentation has been saved.');
 
-        %Move those images having been analyzed to a subdirectory
+        %Move those images to a subdirectory after they are analyzed
         finishedDir='done';
         if ~exist(fullfile(morph_mat_directory,finishedDir), 'dir')
             mkdir(fullfile(morph_mat_directory,finishedDir));
         end
         movefile(matin,fullfile(morph_mat_directory,finishedDir));
-        disp('Images analyzed have been moved to done directory.');
+        disp('Analyzed images have been moved to "done" directory.');
     catch
         disp(['STOP analyzing specimen: ', barcode,'_',vdlist{side},flag]);
     end

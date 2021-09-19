@@ -27,11 +27,11 @@ function headTipPt=findHeadTip(body)
         end
         
         %find the smallest distance and use that as an index into B:
-        cloestRecPt0=flip(sideEdgePt(edgeDist==min(edgeDist),:),2);
-        if size(cloestRecPt0,1)>1
-            headTipPt=cloestRecPt0(1,:);
+        closestRecPt0=flip(sideEdgePt(edgeDist==min(edgeDist),:),2);
+        if size(closestRecPt0,1)>1
+            headTipPt=closestRecPt0(1,:);
         else
-            headTipPt=cloestRecPt0;
+            headTipPt=closestRecPt0;
         end
 
 end
