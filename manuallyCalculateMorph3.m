@@ -75,9 +75,9 @@ for matinID=1:length(img_listing)
                 scale=sppmat{12};
             elseif strcmp(ana_mode,'allBands') %Use temporary points
                 ref=imclearborder(sppmat{end-1});
-                if nnz(ref)==0
-                    ref=sppmat{end-1};
-                end
+%                 if nnz(ref)==0
+%                     ref=sppmat{end-1};
+%                 end
                 stat=regionprops(ref,'Centroid','BoundingBox');
                 tipPts=[stat.BoundingBox(1),stat.BoundingBox(2) ; stat.BoundingBox(1)+stat.BoundingBox(3),stat.BoundingBox(2)];
                 refPts=zeros(6,2)+stat.Centroid;
