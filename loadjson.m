@@ -21,7 +21,7 @@ function data = loadjson(fname,varargin)
 %      fname: input file name; if fname contains "{}" or "[]", fname
 %             will be interpreted as a JSON string
 %      opt: (optional) a struct to store parsing options, opt can be replaced by 
-%           a list of ('param',value) pairs - the param string is equivallent
+%           a list of ('param',value) pairs - the param string is equivalent
 %           to a field in opt. opt can have the following 
 %           fields (first in [.|.] is the default)
 %
@@ -175,7 +175,7 @@ function [object, pos,index_esc] = parse_array(inputstr, pos, esc, index_esc, va
                             end
                         end
 
-                        % next handle 2D array; these are most common ones
+                        % next handle 2D array; these are the most common ones
                         if(maxlevel==2 && ~isempty(regexp(arraystr(2:end),'^\s*\[','once')))
                             rowstart=find(arraystr(2:end)=='[',1)+1;
                             if(rowstart)

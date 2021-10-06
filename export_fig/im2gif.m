@@ -174,7 +174,7 @@ switch lower(info(1).Format)
                 A{a} = reshape(map(uint32(A{a})+1,:), [size(A) size(map, 2)]); % Assume indexed from 0
             end
             if size(A{a}, 3) == 4
-                % TIFF in CMYK colourspace - convert to RGB
+                % TIFF in CMYK colorspace - convert to RGB
                 if isfloat(A{a})
                     A{a} = A{a} * 255;
                 else

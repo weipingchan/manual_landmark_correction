@@ -94,7 +94,7 @@ function [bolbMorph,antFig]=antennaMeasure8(mask,refPts,tipPts,wingMask,body, mi
 if ~isempty(antennaTipDist) && numberOfAntennae0~=0
     numberOfAntennae=size(antennaTipDist,1);
         
-    if max(antennaTipDist(:,3))>minimalAntennaLength %Define antenna as those longer than minimalAntennaLength pixels
+    if max(antennaTipDist(:,3))>minimalAntennaLength %Define antennae as those longer than minimalAntennaLength pixels
         if numberOfAntennae==2 && numberOfAntennae0>=2 %two antennae
             disp('TWO antennae are found');
             [bolbMorph,antFig]=twoAntennaMeasure5(mask, body, antenna1,distanceAnt0,forkPt00, bodyraw, upperSegMask, scalelen);
@@ -133,7 +133,7 @@ else
     catch
         bolbMorph=-9999 + zeros(2, 4);
         antFig=double(mask*0.1);
-    %     %Plot antennae
+    %     %Plot antenna
     %     antFig=figure('visible', 'off');
     %     imshow(mask*0.1);
     %     hold off;

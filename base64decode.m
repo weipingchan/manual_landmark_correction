@@ -3,7 +3,7 @@ function output = base64decode(varargin)
 % output = base64decode(input)
 %
 % Decoding a Base64-encoded byte-stream to recover the original data
-% This function depends on JVM in MATLAB or, can optionally use the ZMat 
+% This function depends on JVM in MATLAB or can optionally use the ZMat 
 % toolbox (http://github.com/fangq/zmat)
 %
 % Copyright (c) 2012, Kota Yamaguchi

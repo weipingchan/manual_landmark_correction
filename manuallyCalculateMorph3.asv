@@ -83,7 +83,7 @@ for matinID=1:length(img_listing)
             end
             ptNameList= {'L-F&H','L-F&B','R-F&B','R-F&H','R-H&B','L-H&B'};
             tipList={'tip-LF','tip-RF'};
-        %     {'Left corner dividing fore & hindwings','Left corner dividing forewing & body','Right corner dividing  forewing & body',...
+        %     {'Left corner dividing fore & hindwings','Left corner dividing forewing & body','Right corner dividing forewing & body',...
         %         'Right corner dividing fore & hindwings','Right corner dividing hindwing & body','Left corner dividing hindwing & body'};
 
         %Manually define those key points
@@ -151,7 +151,7 @@ for matinID=1:length(img_listing)
         morphinfo{7}=wingParts; %right and left X fore and hindwings. Total: 4
         morphinfo{8}=WingAxesSlopes; %Slopes for the front edge of forewings and rear edge of hindwings
         morphinfo{9}=tformWingImg; %Re-posed wings
-        morphinfo{10}=shapeImg; %Re-posed fore-hindwings in the same panel and related points in new coordinations.
+        morphinfo{10}=shapeImg; %Re-posed fore-hindwings in the same panel and related points in new corrdinations.
         morphinfo{11}=allinfo; %Reference points before and after realignment
         morphinfo{12}=scale; %The scale bar (number of pixels = 1 cm)
         morphinfo{13}=segmented_img;

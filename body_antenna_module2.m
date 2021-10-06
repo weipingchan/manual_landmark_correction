@@ -33,7 +33,7 @@ end
 bodyMask=body;
 
 %Antennae %The unit for all antenna parameters is mm
-minimalAntennaLength=60; %The length of antenna should longer than this length or it will be neglected
+minimalAntennaLength=60; %The length of antenna should be longer than this length or it will be neglected
  [antennaCharacters,antFig]=antennaMeasure8(mask,refPts,tipPts,wingMask,body,minimalAntennaLength, bodyraw, upperSegMask, scalelen);
  antennaMask=antFig>0.8;
  disp('Body and antennae are segmented');

@@ -1,5 +1,5 @@
 function [bolbMorph,antFig]=twoAntennaMeasure5(mask, body, antenna1,distanceAnt0,forkPt00, bodyraw, upperSegMask, scalelen)
-            %Head mask until two antena spread
+            %Head mask until two antennae spread
             radii=10;
             while 1
                 Cmask = createCirclesMask(mask, forkPt00, radii);
@@ -7,7 +7,7 @@ function [bolbMorph,antFig]=twoAntennaMeasure5(mask, body, antenna1,distanceAnt0
                 cAntenna00=bwareaopen(immultiply(antenna1,revCmask),100);
                 cAntenna0=immultiply(logical(bwareaopen(immultiply(cAntenna00, upperSegMask),200)),  imcomplement(bodyraw));
                 [labeledAntenna0, numberOfBlobs0] = bwlabel(cAntenna0);                
-                if numberOfBlobs0>2 %if there are more than two objects, take the two closer to the top
+                if numberOfBlobs0>2 %if there are more than two objects, take the two closest to the top
                     poslist=[];
                     for k0=1:numberOfBlobs0
                         obj=ismember(labeledAntenna0, k0);
@@ -18,7 +18,7 @@ function [bolbMorph,antFig]=twoAntennaMeasure5(mask, body, antenna1,distanceAnt0
                     idxlist=[];
                      for ii=1:2
                       [~,idx] = min(poslist0);
-                      % remove for the next iteration the last smallest value:
+                      % remove the smallest value for the next iteration:
                       poslist0(idx) = 9999;
                       idxlist=[idxlist,idx];
                      end                   
@@ -137,21 +137,21 @@ function [bolbMorph,antFig]=twoAntennaMeasure5(mask, body, antenna1,distanceAnt0
                             tipAnt=[];
                         end
                         
-                        if ~isempty(antL) && ~isempty(tipAnt)%Added March 14, 2020
+                        if ~isempty(antL) && ~isempty(tipAnt)
                             basetipdist=pdist([tipAnt;antennaeBase],'euclidean');
                             curveDegree=antL/basetipdist;
-                        elseif isempty(antL) && ~isempty(tipAnt) %Added March 14, 2020
-                            if bolbMorph1(1,1)<0 %Added March 14, 2020
-                                antL=-9999; %Added March 14, 2020
-                                curveDegree=-9999; %Added March 14, 2020
-                            else %Added March 14, 2020
-                                antL=bolbMorph1(1,1); %Added March 14, 2020
-                                curveDegree=bolbMorph1(1,4); %Added March 14, 2020
-                            end  %Added March 14, 2020
-                        else  %Added March 14, 2020
-                            antL=-9999; %Added March 14, 2020
-                            curveDegree=-9999; %Added March 14, 2020
-                        end %Added March 14, 2020
+                        elseif isempty(antL) && ~isempty(tipAnt) 
+                            if bolbMorph1(1,1)<0 
+                                antL=-9999; 
+                                curveDegree=-9999; 
+                            else 
+                                antL=bolbMorph1(1,1); 
+                                curveDegree=bolbMorph1(1,4); 
+                            end 
+                        else 
+                            antL=-9999; 
+                            curveDegree=-9999;
+                        end
                         if antL>0 antLout=antL/scalelen*10;, else antLout=-9999;,  end;
                         if bolbMorph1(2)>0 antWout=bolbMorph1(2:3)/scalelen*10;, else antWout=bolbMorph1(2:3);,  end;
                         bolbMorph(rfAnt,:)=[antLout, antWout, curveDegree];

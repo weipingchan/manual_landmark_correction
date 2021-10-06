@@ -1,8 +1,8 @@
 function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,refPts,ptNameList)
     %ptNameList= {'L-F&H','L-F&B','R-F&B','R-F&H','R-H&B','L-H&B'};
     %tipList={'tip-LF','tip-RF'};
-    %     {'Left corner dividing Fore & Hing Wings','Left corner dividing Fore Wing & Body','Right corner dividing  Fore Wing & Body',...
-    %         'Right corner dividing Fore & Hing Wings','Right corner dividing Hind Wing & Body','Left corner dividing Hind Wing & Body'};
+    %     {'Left corner dividing fore & hindwings','Left corner dividing forewing & body','Right corner dividing forewing & body',...
+    %         'Right corner dividing fore & hindwings','Right corner dividing hindwing & body','Left corner dividing hindwing & body'};
     [B0,~]=bwboundaries(ref);
     if length(B0)==1
         edgePt=B0{1};
@@ -32,7 +32,7 @@ function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,ref
             while 1
             k = waitforbuttonpress;
             %13 enter
-            % 32 space
+            %32 space
             %104 f
             %114 r
                 if k==1 %exclude mouse click

@@ -8,7 +8,7 @@ function s=mergestruct(s1,s2)
 % date: 2012/12/22
 %
 % input:
-%      s1,s2: a struct object, s1 and s2 can not be arrays
+%      s1,s2: a struct object, s1 and s2 cannot be arrays
 %
 % output:
 %      s: the merged struct object. fields in s1 and s2 will be combined in s.

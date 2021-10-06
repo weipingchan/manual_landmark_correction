@@ -75,16 +75,16 @@ function [bolbMorph,antFig,tipAntennae,tipAnt]=oneAntennaeMeasure03(mask, forkPt
         meanW= antB.Area/antL;
         basetipdist=pdist([tipAnt;antennaeBase],'euclidean');
         curveDegree=antL/basetipdist;
-%         meanW= (antB.Perimeter - sqrt(antB.Perimeter^2-4*2*antB.Area))/(2*2);     %Do average width: regionProp ->  w = (P - sqrt(P^2-4*2*A))/(2*2)
+%         meanW= (antB.Perimeter - sqrt(antB.Perimeter^2-4*2*antB.Area))/(2*2);     %Find average width: regionProp ->  w = (P - sqrt(P^2-4*2*A))/(2*2)
         
-        tipMask = createCirclesMask(mask, flip(tipAnt), antL/5);     %Create tip mask again (use 1/5 of total length), and use regionProp find width
+        tipMask = createCirclesMask(mask, flip(tipAnt), antL/5);     %Create tip mask again (use 1/5 of total length), and use regionProp to find width
         tipAntennae=bwareafilt(logical(immultiply(antennae,tipMask)),1);
         bolbB=regionprops(tipAntennae,'MinorAxisLength');
         bolbW=bolbB.MinorAxisLength;
         bolbMorph=[antL,meanW, bolbW, curveDegree];
         antFig=double(mask*0.1+antennae*0.8); 
         
-%         %Plot antenna
+%         %Plot antennae
 %         antFig=figure('visible', 'off');
 %         imshow(labeloverlay(double(mask*0.1+antennae*0.5),It,'Colormap','autumn','Transparency',0));hold on;
 %         plot( forkPt2(:,1), forkPt(:,2),'bO');

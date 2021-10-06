@@ -289,10 +289,10 @@ disp('########## Start to rotate each wing parts. ##########');
 [tformWingImg, tformPtData]=wingRotation(wingParts,WingAxesSlopes,refPts);
 disp('########## The rotation of all wings has been finished. ##########');
 
-disp('########## Start to compose forewing and hindwing. ##########');
+disp('########## Start to compose forewing and ind-wing. ##########');
 %rotate and normalize the position of a pair of forewings and hindwings
 shapeImg=combineForeHindWings(tformWingImg,tformPtData);
-disp('########## Forewing and hindwing have been composed. ##########');
+disp('########## Fore wing and Hind wing have been composed. ##########');
 
 disp('########## Start to integrate four wings into one panel. ##########');
 [allComImg, allinfo]=integrate4WingsInto1Panel(shapeImg,tformWingImg,refPts);

@@ -1,29 +1,29 @@
 function [allComImg, allinfo]=integrate4WingsInto1Panel(shapeImg,tformWingImg,refPts)
-%Fore-wing mix
-disp('Start to combine fore-wings.');
+%Forewing mix
+disp('Start to combine forewings.');
 Lpar=shapeImg{1,2};
 Rpar=shapeImg{2,2};
 bodyW=pdist([refPts(end-2,:);refPts(end,:)],'euclidean')+200; %This value determines the distance between left and right wings
 Lref=Lpar(2,:)+[bodyW 0];
 Rref=Rpar(2,:);
-disp('The reference image is Left Fore-wing.');
+disp('The reference image is left forewing.');
 
 LforImg=tformWingImg{1};
 RforImg=tformWingImg{3};
 
 horMvDis=Lref-Rref;
-if horMvDis(1)<0 || horMvDis(2)<0 %If the moving direction is negetive, keeping the full size will change the coordination of the target object
+if horMvDis(1)<0 || horMvDis(2)<0 %If the moving direction is negative, keeping the full size will change the coordination of the target object
     mvRImg = imtranslate(RforImg,horMvDis);
     disp('Full output view is NOT applied since variable [horMvDis] contains negative value.');
 else
     mvRImg = imtranslate(RforImg,horMvDis,'FillValues',0,'OutputView','full');
 end
-disp('Right Fore-wing has been re-registered.');
+disp('Right forewing has been re-registered.');
 FcomImg = imfuse(LforImg,mvRImg,'blend');
-disp('The composition of fore-wings is finished.');
+disp('The composition of forewings is finished.');
 
-%Hind-wing mix
-disp('Start to combine hind-wings.');
+%Hindwing mix
+disp('Start to combine hindwings.');
 LhindImg=tformWingImg{2};
 RhindImg=tformWingImg{4};
 
@@ -34,7 +34,7 @@ if LverMvDis(1)<0 || LverMvDis(2)<0
 else
     LmvRImg = imtranslate(LhindImg,LverMvDis,'OutputView','full');
 end
-disp('Left Hind-wing has been re-registered.');
+disp('Left hindwing has been re-registered.');
 
 RverMvDis=Rpar(2,:)-Rpar(3,:);
 if RverMvDis(1)<0 || RverMvDis(2)<0
@@ -49,10 +49,10 @@ if horMvDis(1)<0 || horMvDis(2)<0
 else
     RmvRImg = imtranslate(RmvRImg0,horMvDis,'OutputView','full');
 end
-disp('Right Hind-wing has been re-registered.');
+disp('Right hindwing has been re-registered.');
 
 HcomImg = imfuse(LmvRImg,RmvRImg,'blend');
-disp('The composition of hind wings is finished.');
+disp('The composition of hindwings is finished.');
 %Combine both images to derive the final one
 allComImg = imfuse(FcomImg,HcomImg);
 disp('The composition of all wings is finished.');

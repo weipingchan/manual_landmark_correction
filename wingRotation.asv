@@ -19,13 +19,13 @@ wingPartNameList={'Left Fore Wing','Left Hind Wing','Right Fore Wing','Right Hin
             tformWingImg{pInd}=rpartWing;
             tformPtData{pInd}=newRefPts;
         else
-            %Hindwings
+            %Hind-wings
             if partSlope~=0
                 partVector=[sign(partSlope), abs(partSlope)];
                 ver = [0, 1];
                 [rpartWing, newRefPts]=rotateWings(pInd,partWing,partVector,ver,refPts);
-            else %No rotation for hindwing (Eg. Sphingidae)
-                disp('No rotation applied to hindwings');
+            else %No rotation for hind-wing (Eg. Sphingidae)
+                disp('No rotation applied to hind-wings');
                 rpartWing=partWing;
                 newRefPts=refPts;
             end

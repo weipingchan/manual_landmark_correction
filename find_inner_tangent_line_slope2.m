@@ -73,7 +73,7 @@ edgePtsCountDiff2=sign([edgePtsCountDiff,0]);
 IdxLinear=findchangepts(edgePtsCount,'MaxNumChanges',3,'Statistic','linear');
 IdxStd=findchangepts(edgePtsCount,'MaxNumChanges',3,'Statistic','std'); 
 edgePtsCountDiff3=ones( [1,length(edgePtsCount)] );
-edgePtsCountDiff3([IdxLinear,IdxStd]+1)=2; %points shows the disconnectivity to its neighbor
+edgePtsCountDiff3([IdxLinear,IdxStd]+1)=2; %point shows the disconnectivity to its neighbor
 edgePtsCountMean=edgePtsCount;
 edgePtsCountMean(edgePtsCountMean<mean(edgePtsCountMean))=0;
 

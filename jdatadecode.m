@@ -20,11 +20,11 @@ function newdata=jdatadecode(data,varargin)
 %               "_ArrayIsSparse_", "_ArrayIsComplex_", 
 %               "_ArrayZipType_", "_ArrayZipSize", "_ArrayZipData_"
 %      opt: (optional) a list of 'Param', value pairs for additional options 
-%           The supported options include
+%           The supported options include:
 %               Recursive: [1|0] if set to 1, will apply the conversion to 
 %                            every child; 0 to disable
 %               Base64: [0|1] if set to 1, _ArrayZipData_ is assumed to
-%                         be encoded with base64 format and need to be
+%                         be encoded with base64 format and needs to be
 %                         decoded first. This is needed for JSON but not
 %                         UBJSON data
 %               Prefix: ['x0x5F'|'x'] for JData files loaded via loadjson/loadubjson, the

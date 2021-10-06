@@ -15,7 +15,7 @@ function [bolbMorph,antFig]=oneAntennaeMeasure4(mask, forkPt00, oneAntenna,anten
         end
         %%
         if size(distanceAnt,1)>1
-            %Cluster points long distances from the fork
+            %Cluster points with long distances from the fork
             Dist = sqrt(sum(bsxfun(@minus, distanceAnt(:,1:2), flip(forkPt00)).^2,2));
             antennaTipDist0= sortrows(distanceAnt(Dist>mean(Dist)+std(Dist)*1/2,:),2); %first one is the left one
             antennaTipDistA0=sortrows(antennaTipDist0(antennaTipDist0(:,1)<mean(antennaTipDist0(:,1)),:),3);
@@ -75,7 +75,7 @@ function [bolbMorph,antFig]=oneAntennaeMeasure4(mask, forkPt00, oneAntenna,anten
     if ~isempty(antL) && ~isempty(tipAnt)
         basetipdist=pdist([tipAnt;antennaeBase],'euclidean');
         curveDegree=antL/basetipdist;
-    elseif isempty(antL) && ~isempty(tipAnt) %Added March 14, 2020
+    elseif isempty(antL) && ~isempty(tipAnt) 
         if bolbMorph1(1,1)<0
             antL=-9999;
             curveDegree=-9999;
@@ -83,9 +83,9 @@ function [bolbMorph,antFig]=oneAntennaeMeasure4(mask, forkPt00, oneAntenna,anten
             antL=bolbMorph1(1,1);
             curveDegree=bolbMorph1(1,4);
         end
-    else  %Added March 14, 2020
-        antL=-9999; %Added March 14, 2020
-        curveDegree=-9999; %Added March 14, 2020
+    else  
+        antL=-9999;
+        curveDegree=-9999; 
     end
     if antL>0 antLout=antL/scalelen*10;, else antLout=-9999;,  end;
     if bolbMorph1(2)>0 antWout=bolbMorph1(2:3)/scalelen*10;, else antWout=bolbMorph1(2:3);,  end;
