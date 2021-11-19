@@ -90,6 +90,7 @@ for matinID=1:length(img_listing)
         %         'Right corner dividing fore & hindwings','Right corner dividing hindwing & body','Left corner dividing hindwing & body'};
 
         %Manually define those key points
+        bflag=0;
         [newTipList,newRefList, bflag]=manuallyDefineKeyRefPts2(ref,tipPts,tipList, refPts(1:6,:), ptNameList);
         disp(['Key reference points in Img No. ', num2str(matinID),' out of  ',num2str(length(img_listing)),' have been manually defined.']);
 
