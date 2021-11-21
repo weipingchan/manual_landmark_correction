@@ -1,4 +1,4 @@
-function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,refPts,ptNameList)
+function [newTipList,newRefList, bflag]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,refPts,ptNameList)
     %ptNameList= {'L-F&H','L-F&B','R-F&B','R-F&H','R-H&B','L-H&B'};
     %tipList={'tip-LF','tip-RF'};
     %     {'Left corner dividing fore & hindwings','Left corner dividing forewing & body','Right corner dividing forewing & body',...
@@ -33,7 +33,7 @@ function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,ref
             k = waitforbuttonpress;
             %13 enter
             %32 space
-            %104 f
+            %102 f
             %114 r
                 if k==1 %exclude mouse click
                     returnValue = double(get(gcf,'CurrentCharacter'));
@@ -43,9 +43,9 @@ function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,ref
 
             if returnValue==13 %Press Enter to confirm using this box for adjusting
                 break
-%             elseif returnValue==102 %Press 'f' to force exit the entire manual process
-%                 bflag=1;
-%                 break
+            elseif returnValue==102 %Press 'f' to force exit the entire manual process
+                bflag=1;
+                break
             elseif returnValue==114 %Press 'r' to redo the manual process
                 bflag=2;
                 break
@@ -72,8 +72,8 @@ function [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList,ref
                 break
             end
             hid=hid+1;
-%         elseif  bflag==1
-%             break
+        elseif  bflag==1
+            break
         elseif bflag==2
             close(refimg);
             refimg=figure;

@@ -59,6 +59,7 @@ for matinID=1:length(img_listing)
 
     disp(['Start to manually analyze specimen: ', barcode,'_',vdlist{side},flag]);
     
+    bflag=0;
     try
             matin=fullfile(morph_mat_directory,matinname);
             %read original matrix
@@ -90,7 +91,7 @@ for matinID=1:length(img_listing)
         %         'Right corner dividing fore & hindwings','Right corner dividing hindwing & body','Left corner dividing hindwing & body'};
 
         %Manually define those key points
-        [newTipList,newRefList]=manuallyDefineKeyRefPts2(ref,tipPts,tipList, refPts(1:6,:), ptNameList);
+        [newTipList,newRefList, bflag]=manuallyDefineKeyRefPts2(ref,tipPts,tipList, refPts(1:6,:), ptNameList);
         disp(['Key reference points in Img No. ', num2str(matinID),' out of  ',num2str(length(img_listing)),' have been manually defined.']);
 
         %Adjusted analyzing process
@@ -182,6 +183,10 @@ for matinID=1:length(img_listing)
         disp('Analyzed images have been moved to "done" directory.');
     catch
         disp(['STOP analyzing specimen: ', barcode,'_',vdlist{side},flag]);
+    end
+    
+    if bflag==1 %force stop the script
+        break
     end
 end
 end
