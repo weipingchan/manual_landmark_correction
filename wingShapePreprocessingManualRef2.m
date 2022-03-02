@@ -218,6 +218,7 @@ segPts=[forehindCornerL;conjCornerLF;conjCornerRF;forehindCornerR;conjCornerRH;c
 disp('########## Start to find the slope of long axes of wings. ##########');
 %[WingAxesSlopes,tipPts]=findSlopesOfWingAxes(maskf,symAxis,realCen,segPts,boundingBox);
 [WingAxesSlopes,tipPts]=findSlopesOfWingAxesManualRef(mask,symAxis,realCen,segPts,boundingBox,newTipList);
+WingAxesSlopes(isinf(WingAxesSlopes))=10^10; %a small trick to prevent Inf
 disp('########## The slope of long axes of wings are determined. ##########');
 %%%%%%%%%%%%%%%Special Region For Sphingidae%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
