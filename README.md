@@ -1,4 +1,4 @@
-# manual_landmark_correction
+# manual landmark correction
  A desktop version for manually identifying and correcting morphometric landmarks. Please begin with 'manually_calculate_morph.m' and specify the required arguments there.
 
 Please find the article describing the application of this script below (DOI: 10.1038/s42003-022-04282-z):
